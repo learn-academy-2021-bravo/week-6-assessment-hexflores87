@@ -7,24 +7,27 @@
 # FILE: app/controller/blog_posts_controller.rb
 
 # ---1)
+#  This purpose represents creating a controller called BlogPostsController. In a standard rails application all the apps controllers are inherited from the ApplicationController.
 class BlogPostsController < ApplicationController
   def index
     # ---2)
+    #  represents the instance variable from the controller method.
     @posts = BlogPost.all
   end
 
-  def show
-    # ---3)
+  def show 
+    # ---3) Lists one item in the model
+    # 
     @post = BlogPost.find(params[:id])
   end
 
-  # ---4)
+  # ---4) Shows a form to the user.
   def new
     @post = Post.new
   end
 
   def create
-    # ---5)
+    # ---5) This will add info to the DB
     @post = BlogPost.create(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -33,14 +36,14 @@ class BlogPostsController < ApplicationController
     end
   end
 
-  # ---6)
+  # ---6) This will edit the DB
   def edit
     @post = BlogPost.find(params[:id])
   end
 
   def update
     @post = BlogPost.find(params[:id])
-    # ---7)
+    # ---7) Changes the DB.
     @post.update(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -54,12 +57,12 @@ class BlogPostsController < ApplicationController
     if @post.destroy
       redirect_to blog_posts_path
     else
-      # ---8)
+      # ---8) This will remove ino from DB
       redirect_to blog_post_path(@post)
     end
   end
 
-  # ---9)
+  # ---9) Private is used to protect the params. 
   private
   def blog_post_params
     # ---10)
